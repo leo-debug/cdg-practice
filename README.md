@@ -5,5 +5,5 @@ Test vim editor
 -->
 
 ```sh
-$ ruby jetruby.rb
+$ ruby hello.rb
 ```
