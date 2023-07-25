@@ -2,20 +2,16 @@
 # и перевод первого символа в верхний регистр
 def fio_line_cleaning (string)
     string = string.tr('^A-Za-z', '').capitalize
-
-    #return string
 end
 
-# очистка строки ввода ФИО от недопустимых символов/букв, кроме цифр
+# очистка строки ввода возраста от недопустимых символов/букв, кроме цифр
 def age_line_cleaning (age)
     age = age.tr('^0-9', '').to_i
-
-    #return age
 end
 
 #преобразуем введенные данные в строку и передаем в метод очистки
 puts "Введите ваше имя:"
-puts first_name = fio_line_cleaning(gets.to_s)
+first_name = fio_line_cleaning(gets.to_s)
 
 puts "Введите вашу фамилию:"
 last_name = fio_line_cleaning(gets.to_s)
