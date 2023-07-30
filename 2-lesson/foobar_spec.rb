@@ -1,11 +1,32 @@
 require 'rspec'
 require_relative 'foobar'
 
-describe 'pokemon' do
+describe 'foobar' do
+    context "Когда один из переданных параметров == 20" do
 
-    it 'says OK if one of the numbers is equal to 20' do
-        expect(collaborator).to have_received(:message).with(args)
-        
+        it 'возвращает число 20, если хотя бы одно из двух введенных чисел == 20' do
+            expect(foobar()).to eq (20)
+
+        end
+
+    end
+
+    context "Когда оба из переданных параметров == 20" do
+
+        it 'возвращает число 20, если хотя бы одно из двух введенных чисел == 20' do
+            expect(foobar()).to eq (20)
+
+        end
+
+    end
+
+    context "Когда ни один из переданных параметров != 20" do
+
+        it 'возвращает число 20, если хотя бы одно из двух введенных чисел == 20' do
+            expect(foobar()).to eq (20)
+
+        end
+
     end
 end
 
