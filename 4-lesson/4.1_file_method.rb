@@ -1,23 +1,25 @@
 @file = '4-homework.txt'
 
+#выводит все строки
 def index
   File.read(@file).split('\n')
 end
   
-
+#находит конкретную строку в файле и выводит ее
 def find(id)
   file_data = File.open(@file).readlines.map { |line| line.chomp }
   file_data.fetch(id+1)
 end
 
-
+#находит все строки, где есть указанный паттерн
 def where(pattern)
+
   File.open(@file).each_line do |line|
     puts line if line[pattern]
   end
 end
 
-
+#обновляет конкретную строку файла
 def update(id, text)
   File.new('buffer.txt', 'w') if !File.exist?('buffer.txt')
   @buffer = 'buffer.txt'
@@ -30,8 +32,8 @@ def update(id, text)
   File.foreach(@file).with_index do |old_string, index|
     file.puts(id == index+1 ? text : old_string)
   end
-  
   file.close
+
   File.write(@file, File.read(@buffer))
 
   File.delete(@buffer) if File.exist?(@buffer)
@@ -39,7 +41,7 @@ def update(id, text)
   File.read(@file).split('\n')
 end
 
-
+#удаляет строку
 def delete(id)
   File.new('buffer.txt', 'w') if !File.exist?('buffer.txt')
   @buffer = 'buffer.txt'
@@ -63,7 +65,7 @@ def delete(id)
   File.read(@file).split('\n')
 end
 
-
+#добавляет строку в конец файла
 def create(string)
   File.write(@file, string, mode: 'a')
 end
@@ -82,7 +84,7 @@ def file_method
   
   #puts "проверка метода where"
   #puts "_____________________"
-  #puts where('строку')
+  #puts where('строк')
   #puts "_____________________"
 
   #puts "проверка метода update"
