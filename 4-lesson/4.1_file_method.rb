@@ -2,31 +2,29 @@
 
 #выводит все строки
 def index
-  File.read(@file).split('\n')
+  File.read(@file).split("\n")
 end
   
 #находит конкретную строку в файле и выводит ее
 def find(id)
   file_data = File.open(@file).readlines.map { |line| line.chomp }
-  file_data.fetch(id+1)
+  file_data.fetch(id-1)
 end
 
 #находит все строки, где есть указанный паттерн
 def where(pattern)
+  arr_match_pattern = []
 
   File.open(@file).each_line do |line|
-    puts line if line[pattern]
+    arr_match_pattern << line if line.include?(pattern)
   end
+  arr_match_pattern
 end
 
 #обновляет конкретную строку файла
 def update(id, text)
   File.new('buffer.txt', 'w') if !File.exist?('buffer.txt')
   @buffer = 'buffer.txt'
-
-  def index
-    File.foreach(@file) { |string| puts string }
-  end
   
   file = File.open(@buffer, 'w')
   File.foreach(@file).with_index do |old_string, index|
@@ -38,7 +36,7 @@ def update(id, text)
 
   File.delete(@buffer) if File.exist?(@buffer)
 
-  File.read(@file).split('\n')
+  File.read(@file).split("\n")
 end
 
 #удаляет строку
@@ -62,7 +60,7 @@ def delete(id)
 
   File.delete(@buffer) if File.exist?(@buffer)
 
-  File.read(@file).split('\n')
+  File.read(@file).split("\n")
 end
 
 #добавляет строку в конец файла
@@ -79,7 +77,7 @@ def file_method
 
   #puts "проверка метода find"
   #puts "_____________________"
-  #puts find(1)
+  #puts find(3)
   #puts "_____________________"
   
   #puts "проверка метода where"
@@ -89,7 +87,7 @@ def file_method
 
   #puts "проверка метода update"
   #puts "_____________________"
-  #puts update(16, 'ЭТА СТРОКА ОБНОВЛЕНА')
+  #puts update(6, 'ЭТА СТРОКА ОБНОВЛЕНА')
   #puts "_____________________"
 
   #puts "проверка метода delete"
