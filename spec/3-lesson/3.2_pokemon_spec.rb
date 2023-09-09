@@ -8,9 +8,8 @@ RSpec.describe 'pokemon' do
 
   describe 'тест основного метода add_pokemon' do
     it 'должен распечатать хеш с покемонами' do
-        expected_result = "Сколько покемонов добавить?\nВведите имя 1 покемона:\nВведите цвет 1 покемона:\nВведите имя 2 покемона:\nВведите цвет 2 покемона:\n[{:name=>\"Pikachu\\nYellow\", :color=>\"Charizard\\nOrange\"}, {:name=>\"Charizard\\nOrange\", :color=>\"Charizard\\nOrange\"}]\n"
-
-        expect { add_pokemon }.to output(expected_result).to_stdout
+      expected_result = "Сколько покемонов добавить?\nВведите имя 1 покемона:\nВведите цвет 1 покемона:\nВведите имя 2 покемона:\nВведите цвет 2 покемона:\n[{:name=>\"Pikachu\\nYellow\", :color=>\"Charizard\\nOrange\"}, {:name=>\"Charizard\\nOrange\", :color=>\"Charizard\\nOrange\"}]\n"
+      expect { add_pokemon }.to output(expected_result).to_stdout
     end
   end
 

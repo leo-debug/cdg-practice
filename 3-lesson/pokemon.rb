@@ -24,7 +24,7 @@ def write_pokemon_hash(num)
   name = gets.chomp
   puts "Введите цвет #{num} покемона:"
   color = gets.chomp
-  pokemon = { name: name, color: color }
+  { name: name, color: color }
 end
 
 # вспомогательный метод очистки строки  от недопустимых символов/букв, кроме цифр

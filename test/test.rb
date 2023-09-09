@@ -8,4 +8,3 @@ def sum
   result = a + b
   pp "сумма чисел равна: #{result}"
 end
-

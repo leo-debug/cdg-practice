@@ -1,75 +1,71 @@
-@file = '4-homework.txt'
+# frozen_string_literal: true
 
-#выводит все строки
+ORIGINAL_FILE = '4-homework.txt'
+BUFFER = 'buffer.txt'
+
+# выводит все строки
 def index
-  File.read(@file).split("\n")
-end
-  
-#находит конкретную строку в файле и выводит ее
-def find(id)
-  file_data = File.open(@file).readlines.map { |line| line.chomp }
-  file_data.fetch(id-1)
+  File.read(ORIGINAL_FILE) { |string| puts string }
 end
 
-#находит все строки, где есть указанный паттерн
+# находит конкретную строку в файле по id и выводит ее
+def find(line_number)
+  file_data = File.open(ORIGINAL_FILE).readlines.map(&:chomp)
+  index = line_number - 1
+  file_data[index] if index >= 0 && index < file_data.size
+end
+
+# находит все строки, где есть указанный паттерн
 def where(pattern)
   arr_match_pattern = []
 
-  File.open(@file).each_line do |line|
-    arr_match_pattern << line if line.include?(pattern)
+  File.open(ORIGINAL_FILE).each_line do |line|
+    arr_match_pattern << line.chomp if line.include?(pattern)
   end
   arr_match_pattern
 end
 
-#обновляет конкретную строку файла
+# обновляет конкретную строку файла
 def update(id, text)
-  File.new('buffer.txt', 'w') if !File.exist?('buffer.txt')
-  @buffer = 'buffer.txt'
-  
-  file = File.open(@buffer, 'w')
-  File.foreach(@file).with_index do |old_string, index|
-    file.puts(id == index+1 ? text : old_string)
+  File.new('buffer.txt', 'w') unless File.exist?('buffer.txt')
+
+  file = File.open(BUFFER, 'w')
+  File.foreach(ORIGINAL_FILE).with_index do |old_string, index|
+    file.puts(id == index + 1 ? text : old_string)
   end
   file.close
 
-  File.write(@file, File.read(@buffer))
+  File.write(ORIGINAL_FILE, File.read(BUFFER))
 
-  File.delete(@buffer) if File.exist?(@buffer)
+  File.delete(BUFFER)
 
-  File.read(@file).split("\n")
+  File.read(ORIGINAL_FILE).chomp
 end
 
-#удаляет строку
+# удаляет строку
 def delete(id)
-  File.new('buffer.txt', 'w') if !File.exist?('buffer.txt')
-  @buffer = 'buffer.txt'
+  File.new('buffer.txt', 'w') unless File.exist?('buffer.txt')
 
-  def index
-    File.foreach(@file) { |string| puts string }
+  file = File.open(BUFFER, 'w')
+  lines = File.foreach(ORIGINAL_FILE).with_index.filter_map do |old_string, index|
+    id == index + 1 ? nil : old_string.chomp
   end
 
-
-
-  file = File.open(@buffer, 'w')
-  File.foreach(@file).with_index do |old_string, index|
-    file.puts(id == index+1 ? next : old_string)
-  end
-  
+  file.puts(lines)
   file.close
-  File.write(@file, File.read(@buffer))
+  File.write(ORIGINAL_FILE, File.read(BUFFER))
 
-  File.delete(@buffer) if File.exist?(@buffer)
+  File.delete(BUFFER)
 
-  File.read(@file).split("\n")
+  File.read(ORIGINAL_FILE).chomp
 end
 
-#добавляет строку в конец файла
+# добавляет строку в конец файла
 def create(string)
-  File.write(@file, string, mode: 'a')
+  File.write(ORIGINAL_FILE, "#{string}\n", mode: 'a')
 end
 
 def file_method
-
   #puts "проверка метода index"
   #puts "_____________________"
   #puts index
@@ -77,7 +73,7 @@ def file_method
 
   #puts "проверка метода find"
   #puts "_____________________"
-  #puts find(3)
+  #puts find(5)
   #puts "_____________________"
   
   #puts "проверка метода where"
@@ -92,16 +88,13 @@ def file_method
 
   #puts "проверка метода delete"
   #puts "_____________________"
-  #puts delete(1)
+  #puts delete(3)
   #puts "_____________________"
 
   #puts "проверка метода create"
   #puts "_____________________"
   #puts create('Новая строка в конце файла')
   #puts "_____________________"
-
 end
 
 file_method
-
-
