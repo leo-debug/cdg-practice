@@ -10,4 +10,5 @@ group :development do
   gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rspec'
+  gem 'simplecov', require: false
 end
