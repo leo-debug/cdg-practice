@@ -10,7 +10,7 @@ def atm
   end
   p '*'
   p '*'
-  p "Баланс карты: #{user_balance}"
+  p "*"
   p '*'
   p '*'
   p '****************************************************************'
@@ -74,5 +74,3 @@ def atm
   end
   File.open('balance.txt', 'w') { |file| file.write(user_balance) }
 end
-
-atm
