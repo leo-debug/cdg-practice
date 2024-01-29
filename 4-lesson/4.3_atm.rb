@@ -9,23 +9,26 @@ def atm
     user_balance = START_USER_BALANCE
   end
 
-  puts <<~TEXT
-   ****************************************************************
+  greetings = <<~TEXT
+  *****************************************************************
                         Не плачь, валюту прячь.                     
                         Снимай рубли, домой иди!                    
-  
   TEXT
 
-  loop do
-    puts <<~TEXT
-    ----------------Введите символ операции с картой----------------
-    ****************************************************************
-    *Внести деньги - D                        Проверить баланс - B *
-    *Снятие средств - W                     Выход из программы - Q *
-    ****************************************************************
-    TEXT
+  navigation = <<~TEXT
+  ----------------Введите символ операции с картой----------------
+  ****************************************************************
+  *Внести депозит - D                       Проверить баланс - B *
+  *Снятие средств - W                     Выход из программы - Q *
+  ****************************************************************
+  TEXT
 
-      user_query = gets.chomp.downcase if gets
+  puts greetings
+
+  loop do
+    puts navigation
+
+      user_query = gets&.chomp&.downcase
 
     case user_query
     when 'd'
@@ -37,11 +40,6 @@ def atm
       deposit = gets.chomp.to_f
       if deposit.positive?
         user_balance += deposit.round(1)
-        puts <<~TEXT
-           
-        Баланс карты: #{user_balance}
-        
-        TEXT
       else
         puts <<~TEXT
 
@@ -58,11 +56,6 @@ def atm
       withdraw = gets.chomp.to_f
       if withdraw.positive? && withdraw <= user_balance
         user_balance -= withdraw.round(1)
-        puts <<~TEXT
-
-           Баланс карты: #{user_balance}
-        
-        TEXT
       elsif withdraw.negative?
         puts <<~TEXT
 
@@ -95,6 +88,13 @@ def atm
       TEXT
       next
     end
+    puts <<~TEXT
+           
+        Баланс карты: #{user_balance}
+        
+        TEXT
   end
+
   File.open('balance.txt', 'w') { |file| file.write(user_balance) }
+  p 'До новых, волнующих, встреч!'
 end

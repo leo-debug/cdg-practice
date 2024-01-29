@@ -97,4 +97,3 @@ def file_method
   #puts "_____________________"
 end
 
-file_method
